@@ -15,10 +15,19 @@ namespace Printers.Storage.ModelsConfigurations
 
             builder.HasAlternateKey(p => p.PrinterName);
 
+            builder.Property(p => p.PrinterName)
+                .HasMaxLength(20);
+
             builder.HasIndex(p => p.Location);
 
             builder.Property(p => p.Location)
                 .HasMaxLength(20);
+
+            builder.HasOne(pp => pp.PrinterInfo)
+                .WithMany(p => p.PhysicalPrinters)
+                .HasForeignKey(pp => pp.PrinterInfoId)
+                .HasPrincipalKey(p => p.Id)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

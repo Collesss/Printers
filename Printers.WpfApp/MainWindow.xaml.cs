@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,15 @@ namespace Printers.WpfApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private readonly IServiceProvider _serviceProvider;
+        private readonly IConfiguration _configuration;
+
+        public MainWindow(IServiceProvider serviceProvider, IConfiguration configuration)
         {
             InitializeComponent();
+
+            _serviceProvider = serviceProvider;
+            _configuration = configuration;
         }
     }
 }

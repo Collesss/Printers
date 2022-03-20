@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Printers.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Printers.Storage.ModelsConfigurations;
 
 namespace Printers.Storage
 {
@@ -18,7 +16,9 @@ namespace Printers.Storage
         {
             base.OnModelCreating(modelBuilder);
 
-
+            modelBuilder.ApplyConfiguration(new PrinterConfiguration());
+            modelBuilder.ApplyConfiguration(new PhysicalPrinterConfiguration());
+            modelBuilder.ApplyConfiguration(new СartridgeConfiguration());
         }
     }
 }

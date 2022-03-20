@@ -10,7 +10,18 @@ namespace Printers.Storage.ModelsConfigurations
     {
         void IEntityTypeConfiguration<Printer>.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Printer> builder)
         {
-            throw new NotImplementedException();
+            builder.HasKey(p => p.Id);
+
+            builder.Property(p => p.Manufacturer)
+                .HasMaxLength(20)
+                .IsRequired();
+
+            builder.HasIndex(p => p.Manufacturer);
+
+            builder.HasAlternateKey(p => p.Model);
+
+            builder.Property(p => p.Model)
+                .HasMaxLength(50);
         }
     }
 }

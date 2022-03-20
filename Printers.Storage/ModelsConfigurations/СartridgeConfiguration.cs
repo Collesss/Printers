@@ -11,7 +11,15 @@ namespace Printers.Storage.ModelsConfigurations
     {
         void IEntityTypeConfiguration<Сartridge>.Configure(EntityTypeBuilder<Сartridge> builder)
         {
-            throw new NotImplementedException();
+            builder.HasKey(c => c.Id);
+
+            builder.HasAlternateKey(c => c.Model);
+
+            builder.Property(c => c.Model)
+                .HasMaxLength(50);
+
+            builder.HasMany(c => c.Printers)
+                .WithMany(p => p.Cartridges);
         }
     }
 }
